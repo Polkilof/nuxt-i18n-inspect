@@ -8,8 +8,20 @@ const appleCount = ref(2)
 
 // Кейс 6: перекладений рядок потрапляє в стан форми через v-model
 const formValue = ref(t('form.label'))
+
+// Кейс 13: те саме, але багаторядкове — <textarea> замість <input>
+const bio = ref(t('bio'))
+
+// Кейс 14: contenteditable — DOM редагує сам користувач, а не Vue
+const editedText = ref('')
+const onEdit = (event: Event) => {
+  editedText.value = (event.target as HTMLElement).textContent ?? ''
+}
+
 watch(locale, () => {
   formValue.value = t('form.label')
+  bio.value = t('bio')
+  editedText.value = ''
 })
 
 // Кейс 6b: переклад як value в <option> + порівняння рядків
@@ -66,6 +78,24 @@ const checks = computed<Check[]>(() => {
       code: 'answer === t(\'form.yes\')',
       result: answer.value === '' ? 'pick an option in case 6' : String(answer.value === yes),
       verdict: answer.value === '' || answer.value === yes ? 'ok' : 'fail',
+    },
+    {
+      title: 'Textarea state through v-model',
+      code: 'hasMarker(bio)',
+      result: hasMarker(bio.value)
+        ? 'invisible characters will travel in the payload'
+        : 'clean (the marker is gone after manual editing)',
+      verdict: hasMarker(bio.value) ? 'fail' : 'ok',
+    },
+    {
+      title: 'contenteditable after typing',
+      code: 'hasMarker(el.textContent)',
+      result: editedText.value === ''
+        ? 'type inside case 14'
+        : hasMarker(editedText.value)
+          ? `the marker survived editing — key: ${allKeys(editedText.value).join(', ')}`
+          : 'the marker is gone — the string can no longer be opened from the page',
+      verdict: editedText.value === '' || hasMarker(editedText.value) ? 'ok' : 'fail',
     },
     {
       title: 'Marker after pluralization',
@@ -199,6 +229,27 @@ const checks = computed<Check[]>(() => {
         <h2>12. Text with no marker</h2>
         <p>This line is written in the template by hand, past t(). The badge must say there is no marker.</p>
       </article>
+
+      <article>
+        <h2>13. Textarea <code>bio</code></h2>
+        <textarea
+          v-model="bio"
+          rows="3"
+        />
+        <small>A multi-line value carrying the marker. Whether the caret API reaches inside a textarea is engine-specific — if it does not, the @value fallback has to catch it, the same one that resolves placeholders.</small>
+      </article>
+
+      <article>
+        <h2>14. contenteditable <code>editable</code></h2>
+        <p
+          class="editable"
+          contenteditable="true"
+          @input="onEdit"
+        >
+          {{ t('editable') }}
+        </p>
+        <small>Here the user edits the DOM by hand. Type in the middle of the sentence, then at the very end — the marker sits after the last character.</small>
+      </article>
     </section>
 
     <section class="checks">
@@ -243,6 +294,9 @@ article { border: 1px solid #e4e4e9; border-radius: 10px; padding: 16px; backgro
 article p { margin: 0 0 8px; line-height: 1.55; }
 small { display: block; color: #8a8a94; font-size: 12px; line-height: 1.4; }
 input, select { font: inherit; padding: 6px 10px; border: 1px solid #d0d0d6; border-radius: 6px; margin: 0 6px 8px 0; max-width: 100%; }
+textarea { font: inherit; width: 100%; padding: 6px 10px; border: 1px solid #d0d0d6; border-radius: 6px; margin-bottom: 8px; resize: vertical; }
+.editable { border: 1px dashed #d0d0d6; border-radius: 6px; padding: 8px; margin-bottom: 8px; line-height: 1.55; outline: none; }
+.editable:focus { border-style: solid; border-color: #1a1a1a; }
 .clipped { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 260px; }
 .narrow { width: 90px; border: 1px dashed #d0d0d6; padding: 6px; }
 .big { font-size: 28px; }

@@ -92,6 +92,8 @@ Markers survive more than you would expect, and the playground in this repositor
 | pluralization | yes | the key stays the same across forms |
 | `v-html` | yes | resolved from every text node inside |
 | emoji | yes | the alphabet avoids ZWJ, so sequences stay intact |
+| `<textarea>` and `<input>` values | yes | the caret API does not reach inside a form control, so the `@value` fallback resolves it |
+| `contenteditable` | until the text is replaced | typing next to the marker keeps it; select-all-and-retype wipes it |
 
 What breaks, and there is no way around it:
 
@@ -119,7 +121,7 @@ npm run dev      # the minefield playground
 npm test         # unit tests + an SSR test asserting markers in server HTML
 ```
 
-`playground/` is not a demo, it is a test bench: twelve of the nastiest cases on one page. After any change, every one of them should still resolve to the right key.
+`playground/` is not a demo, it is a test bench: fourteen of the nastiest cases on one page. After any change, every one of them should still resolve to the right key.
 
 ## License
 

@@ -19,5 +19,7 @@
   },
   "apples": "no apples | one apple | {count} apples",
   "html": "Text with <b>bold</b> and a <a href=\"#\">link</a> inside",
-  "onlyBase": "This key exists in the base locale only"
+  "onlyBase": "This key exists in the base locale only",
+  "bio": "A note of several lines that lives inside a textarea and can be edited by hand.",
+  "editable": "This paragraph is editable in place — type inside it and watch the marker."
 }

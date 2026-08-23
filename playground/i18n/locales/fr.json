@@ -18,5 +18,7 @@
     "no": "Non"
   },
   "apples": "aucune pomme | une pomme | {count} pommes",
-  "html": "Texte avec du <b>gras</b> et un <a href=\"#\">lien</a> à l'intérieur"
+  "html": "Texte avec du <b>gras</b> et un <a href=\"#\">lien</a> à l'intérieur",
+  "bio": "Une note de plusieurs lignes qui vit dans un textarea et peut être modifiée à la main.",
+  "editable": "Ce paragraphe est modifiable sur place — tapez dedans et observez le marqueur."
 }
