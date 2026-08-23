@@ -1,0 +1,12 @@
+{
+  "plain": "Ein gewöhnlicher Textabsatz, der einfach im Absatz steht.",
+  "form": {
+    "yes": "Ja"
+  },
+  "ellipsis": "Test",
+  "emoji": "Done 🎉",
+  "legacy": {
+    "banner": "Alte Funktion"
+  },
+  "greeting": "Hallo, {name}! Willkommen."
+}

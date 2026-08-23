@@ -1,0 +1,22 @@
+{
+  "plain": "Un paragraphe de texte ordinaire, qui se trouve simplement dans un paragraphe.",
+  "greeting": "Bonjour, {name} ! Bienvenue à bord.",
+  "search": {
+    "placeholder": "Rechercher dans la base...",
+    "title": "Ceci est une infobulle de l'attribut title"
+  },
+  "concat": {
+    "a": "Première partie,",
+    "b": "seconde partie."
+  },
+  "ellipsis": "Une chaîne très longue qui ne tiendra certainement pas dans un bloc étroit et sera coupée par des points de suspension",
+  "narrow": "Polysyllabique",
+  "emoji": "Terminé 🎉",
+  "form": {
+    "label": "Valeur par défaut",
+    "yes": "Oui",
+    "no": "Non"
+  },
+  "apples": "aucune pomme | une pomme | {count} pommes",
+  "html": "Texte avec du <b>gras</b> et un <a href=\"#\">lien</a> à l'intérieur"
+}

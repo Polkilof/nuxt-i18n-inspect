@@ -1,0 +1,67 @@
+{
+  "name": "nuxt-i18n-inspect",
+  "version": "0.0.1",
+  "description": "Edit @nuxtjs/i18n translations in the running app and write them straight to your locale files. No backend.",
+  "repository": "polkilof/nuxt-i18n-inspect",
+  "license": "MIT",
+  "keywords": [
+    "nuxt",
+    "nuxt-module",
+    "i18n",
+    "vue-i18n",
+    "translations",
+    "localization",
+    "in-context-editing"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/types.d.mts",
+      "import": "./dist/module.mjs"
+    },
+    "./runtime/*": {
+      "types": "./dist/runtime/*.d.ts",
+      "import": "./dist/runtime/*.js"
+    }
+  },
+  "main": "./dist/module.mjs",
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./dist/types.d.mts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "workspaces": [
+    "playground"
+  ],
+  "scripts": {
+    "prepack": "nuxt-module-build build",
+    "dev": "npm run dev:prepare && nuxt dev playground --host 0.0.0.0",
+    "dev:build": "nuxt build playground",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playground",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "@nuxt/kit": "^4.5.2"
+  },
+  "devDependencies": {
+    "@nuxt/eslint-config": "^1.17.0",
+    "@nuxt/module-builder": "^1.0.3",
+    "@nuxt/schema": "^4.5.2",
+    "@nuxt/test-utils": "^4.1.0",
+    "@nuxtjs/i18n": "^10.6.0",
+    "@types/node": "latest",
+    "eslint": "^10.8.1",
+    "nuxt": "^4.5.2",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.10",
+    "vue-tsc": "^3.3.10"
+  }
+}

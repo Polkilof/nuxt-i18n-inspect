@@ -1,0 +1,23 @@
+{
+  "plain": "An ordinary paragraph of text that just sits in a paragraph.",
+  "greeting": "Hello, {name}! Welcome aboard.",
+  "search": {
+    "placeholder": "Search the database...",
+    "title": "This is a title attribute tooltip"
+  },
+  "concat": {
+    "a": "First part,",
+    "b": "second part."
+  },
+  "ellipsis": "A very long string that will definitely not fit into a narrow block and will be cut with an ellipsis",
+  "narrow": "Multisyllabic",
+  "emoji": "Done 🎉",
+  "form": {
+    "label": "Default value",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "apples": "no apples | one apple | {count} apples",
+  "html": "Text with <b>bold</b> and a <a href=\"#\">link</a> inside",
+  "onlyBase": "This key exists in the base locale only"
+}
