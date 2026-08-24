@@ -6,6 +6,9 @@ const { t, locale, locales, setLocale } = useI18n()
 // Натомість у вітрині з'являється посилання на StackBlitz: там demo працює.
 const dev = import.meta.dev
 
+// підставлена на збірці з кореневого package.json - див. nuxt.config
+const { version } = useRuntimeConfig().public
+
 // перемикач мов навмисно компактний: у шапці для нього є місце на одну кнопку
 const current = computed<string>({
   get: () => locale.value,
@@ -46,7 +49,7 @@ const languages = computed(() => locales.value.map(item => ({
           class="docs"
           :href="REPO + '#readme'"
         >{{ t('nav.docs') }}</a>
-        <span class="version">v0.1.0</span>
+        <span class="version">v{{ version }}</span>
       </nav>
 
       <div class="tools">
