@@ -1,0 +1,65 @@
+name: pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+# Права рівно ті, яких вимагає deploy-pages, і ні на крок більше
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Пуші можуть іти пачкою, а викласти має сенс лише останній.
+# Розгортання не переривається на півдорозі: cancel-in-progress вимкнений.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24.19.0
+
+      - run: npm i -g --force corepack@latest && corepack enable
+
+      - name: Install dependencies
+        run: npx nypm@latest i
+
+      # demo підключає модуль як file:.., тож dist має існувати до збірки
+      - name: Build module
+        run: npm run prepack
+
+      - uses: actions/configure-pages@v5
+
+      # Pages віддає сайт із підкаталогу з іменем репозиторію. Без бази всі
+      # посилання на _nuxt поїхали б у корінь домену і сторінка лишилась би
+      # без стилів. Ім'я беремо з самого репозиторію, щоб не дублювати рядок.
+      - name: Generate the demo
+        run: npx nuxt generate demo
+        env:
+          NUXT_APP_BASE_URL: /${{ github.event.repository.name }}/
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: demo/.output/public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4
