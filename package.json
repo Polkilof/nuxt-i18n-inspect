@@ -2,7 +2,10 @@
   "name": "nuxt-i18n-inspect",
   "version": "0.1.0",
   "description": "Edit @nuxtjs/i18n translations in the running app and write them straight to your locale files. No backend.",
-  "repository": "polkilof/nuxt-i18n-inspect",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Polkilof/nuxt-i18n-inspect.git"
+  },
   "license": "MIT",
   "keywords": [
     "nuxt",
