@@ -3,6 +3,7 @@ import { basename } from 'node:path'
 import { createError, defineEventHandler, getQuery } from 'h3'
 import { useRuntimeConfig } from '#imports'
 import { getAtPath } from '../../json-path'
+import { unescapeMessage } from '../../message-syntax'
 
 /**
  * Значення ключа в усіх локалях — сирі, з файлів.
@@ -45,7 +46,8 @@ export default defineEventHandler(async (event) => {
       }
       const found = getAtPath(json, key)
       if (found !== null) {
-        value = found
+        // у полі панелі має бути текст, а не {'@'} з екранування
+        value = unescapeMessage(found)
         file = candidate
       }
     }

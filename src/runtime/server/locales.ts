@@ -4,6 +4,7 @@ import { createError } from 'h3'
 import type { H3Event } from 'h3'
 import { useRuntimeConfig } from '#imports'
 import { WritePathError, detectIndent, getAtPath, setAtPath } from '../json-path'
+import { escapeMessage, unescapeMessage } from '../message-syntax'
 import { flatten } from '../report-diff'
 
 /**
@@ -39,7 +40,8 @@ export async function loadLocale(files: string[]): Promise<Map<string, string>> 
   for (const file of files) {
     try {
       for (const [key, value] of flatten(JSON.parse(await readFile(file, 'utf8')))) {
-        merged.set(key, value)
+        // у файлі лежить екранований синтаксис, назовні віддаємо читабельний текст
+        merged.set(key, unescapeMessage(value))
       }
     }
     catch {
@@ -85,15 +87,19 @@ export async function writeEntries(files: string[], entries: WriteEntry[]) {
   for (const entry of entries) {
     let target = fallback
     let created = true
+    // сире значення з файлу: за ним видно, чи був ключ плюралізованим
+    let previous: string | null = null
     for (const [file, source] of sources) {
-      if (getAtPath(source.json, entry.key) !== null) {
+      const found = getAtPath(source.json, entry.key)
+      if (found !== null) {
         target = file
         created = false
+        previous = found
       }
     }
 
     try {
-      setAtPath(sources.get(target)!.json, entry.key, entry.value)
+      setAtPath(sources.get(target)!.json, entry.key, escapeMessage(entry.value, previous))
     }
     catch (error) {
       if (error instanceof WritePathError) {
