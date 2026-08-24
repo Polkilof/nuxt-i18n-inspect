@@ -2,8 +2,7 @@
 
 Alt-click any text in your running Nuxt app, edit it, and the change lands in your locale JSON file. No backend, no database, no sync service — the files in your git repository are the only source of truth.
 
-<!-- Demo GIF goes here. Put the file at docs/demo.gif and uncomment: -->
-<!-- ![Alt-clicking a paragraph opens the panel with every locale side by side](docs/demo.gif) -->
+![Inspect mode on, Alt+click on a paragraph, the text edited in the panel — and the change landing in the locale JSON file](docs/demo.gif)
 
 ```ts
 export default defineNuxtConfig({
@@ -29,6 +28,10 @@ This module does not have a server. It appends an invisible marker to every tran
 | `Ctrl+Enter` | write the edit to the locale file |
 | `Esc` | close the panel; again — leave inspect mode |
 
+![Inspect mode on: the paragraph under the cursor is outlined and its key floats above it](docs/hover.png)
+
+![Alt-clicking a paragraph opens the panel: the key, every locale, and the file each value lives in](docs/panel.png)
+
 Change the combination with `i18nInspect: { hotkey: 'ctrl+k' }`.
 
 Writes go through a temp file and a rename, preserve the source file's indentation and key order, and `@nuxtjs/i18n` HMR picks the change up without a page reload.
@@ -42,11 +45,15 @@ Writes go through a temp file and a rename, preserve the source file's indentati
 | **not translated** (red) | the key is missing from the current locale — you are looking at the fallback |
 | **outside i18n** (amber) | no marker at all — the string is hardcoded past `t()` |
 
+![The page in German with the audit on: every string still showing the English fallback is outlined in red](docs/audit.png)
+
 The second one is noisy by nature: it finds headings, captions and anything nobody ever meant to translate. Numbers, punctuation and single characters are filtered out; exclude the rest with `data-i18n-ignore` on a container.
 
 **Key list** answers "what is left in the whole project". It reads the locale files instead of walking the page, because walking the page can never be complete — a string has to render to be marked, and error states, empty states and modals will not render on their own.
 
 For every locale it shows coverage (`de 412/500`), groups the missing keys by namespace so you translate one context at a time, and puts the base-language text under each key so a copywriter has something to translate from.
+
+![The key list: coverage per locale, keys grouped by namespace, the base text under each one and an empty field to translate into](docs/missing-keys.png)
 
 Two more things it reports, both deliberately kept out of the main count:
 

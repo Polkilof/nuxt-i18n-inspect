@@ -583,7 +583,20 @@ async function saveItem(item: ReportItem) {
   min-height: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
+  /* Firefox: власного оформлення смуги він не дає, лише товщину й два кольори */
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
 }
+/* Chrome і Safari: смуга поверх вмісту, без власної підкладки й стрілок */
+.body::-webkit-scrollbar { width: 8px; }
+.body::-webkit-scrollbar-track { background: transparent; }
+.body::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border: 2px solid transparent;
+  background-clip: content-box;
+  border-radius: 8px;
+}
+.body::-webkit-scrollbar-thumb:hover { background: var(--dim); background-clip: content-box; }
 .hint { display: flex; flex-direction: column; gap: 4px; }
 .brand { font-size: 12px; }
 

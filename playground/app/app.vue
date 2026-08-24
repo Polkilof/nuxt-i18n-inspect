@@ -118,8 +118,10 @@ const checks = computed<Check[]>(() => {
     <header>
       <h1>Marker minefield</h1>
       <p class="lead">
-        Hover over each block: the string under the cursor gets outlined, and its key appears
-        above the outline. It has to match the key in the case heading.
+        Press <kbd>Alt+Shift+I</kbd> to turn inspect mode on. Now hover over any block: the
+        string under the cursor gets outlined and its key appears above the outline — it has
+        to match the key in the case heading. <kbd>Alt+click</kbd> opens the panel for that
+        key, <kbd>Alt+Shift+I</kbd> again turns the mode off.
       </p>
       <nav class="locales">
         <button
@@ -286,6 +288,7 @@ h1 { margin: 0 0 8px; font-size: 28px; }
 h2 { margin: 0 0 10px; font-size: 14px; font-weight: 600; color: #555; }
 code { font-family: ui-monospace, Menlo, monospace; font-size: 12px; background: #f1f1f4; padding: 1px 5px; border-radius: 4px; }
 .lead { color: #555; font-size: 14px; max-width: 70ch; }
+kbd { font: 500 12px/1.4 ui-monospace, Menlo, monospace; background: #1a1a1a; color: #fff; padding: 2px 6px; border-radius: 4px; white-space: nowrap; }
 .locales { display: flex; gap: 8px; margin: 16px 0 28px; }
 .locales button { padding: 6px 14px; border: 1px solid #d0d0d6; background: #fff; border-radius: 999px; cursor: pointer; font-size: 14px; }
 .locales button.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
@@ -294,7 +297,7 @@ article { border: 1px solid #e4e4e9; border-radius: 10px; padding: 16px; backgro
 article p { margin: 0 0 8px; line-height: 1.55; }
 small { display: block; color: #8a8a94; font-size: 12px; line-height: 1.4; }
 input, select { font: inherit; padding: 6px 10px; border: 1px solid #d0d0d6; border-radius: 6px; margin: 0 6px 8px 0; max-width: 100%; }
-textarea { font: inherit; width: 100%; padding: 6px 10px; border: 1px solid #d0d0d6; border-radius: 6px; margin-bottom: 8px; resize: vertical; }
+textarea { font: inherit; box-sizing: border-box; width: 100%; padding: 6px 10px; border: 1px solid #d0d0d6; border-radius: 6px; margin-bottom: 8px; resize: vertical; }
 .editable { border: 1px dashed #d0d0d6; border-radius: 6px; padding: 8px; margin-bottom: 8px; line-height: 1.55; outline: none; }
 .editable:focus { border-style: solid; border-color: #1a1a1a; }
 .clipped { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 260px; }

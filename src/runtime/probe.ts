@@ -37,6 +37,35 @@ const ATTRS = ['placeholder', 'title', 'aria-label', 'alt', 'value'] as const
 
 interface CaretHit { node: Text, offset: number, api: string }
 
+/** Перетин двох прямокутників; null, якщо вони не перетинаються. */
+function intersect(a: DOMRect, b: DOMRect): DOMRect | null {
+  const left = Math.max(a.left, b.left)
+  const top = Math.max(a.top, b.top)
+  const right = Math.min(a.right, b.right)
+  const bottom = Math.min(a.bottom, b.bottom)
+  if (right <= left || bottom <= top) return null
+  return new DOMRect(left, top, right - left, bottom - top)
+}
+
+/**
+ * Обрізає підсвітку по предках, які ховають переповнення.
+ *
+ * getClientRects() віддає геометрію повного тексту, а не видимого: при
+ * text-overflow: ellipsis рядок обрізаний візуально, але в розкладці
+ * лишається на всю довжину, і рамка вилазила в сусідній блок.
+ */
+function clipToAncestors(rects: DOMRect[], start: Element | null): DOMRect[] {
+  let out = rects
+  let el = start
+  for (let depth = 0; el && out.length && depth < 12; depth++, el = el.parentElement) {
+    const style = getComputedStyle(el)
+    if (style.overflowX === 'visible' && style.overflowY === 'visible') continue
+    const box = el.getBoundingClientRect()
+    out = out.map(r => intersect(r, box)).filter((r): r is DOMRect => r !== null)
+  }
+  return out
+}
+
 /** Текстова нода під точкою. Дві різні API — у старих WebKit своя. */
 function caretHit(x: number, y: number): CaretHit | null {
   const doc = document as Document & {
@@ -71,7 +100,7 @@ function segmentRects(node: Text, offset: number): DOMRect[] {
   const range = document.createRange()
   range.setStart(node, marker.segmentStart)
   range.setEnd(node, marker.index)
-  return [...range.getClientRects()]
+  return clipToAncestors([...range.getClientRects()], node.parentElement)
 }
 
 /** Усі текстові ноди елемента в порядку документа. */
@@ -144,7 +173,7 @@ function inheritedHit(node: Text, api: string): InspectHit | null {
     source: 'inherited',
     api,
     label: `inherited from <${found.owner.tagName.toLowerCase()}>`,
-    rects: [...found.range.getClientRects()],
+    rects: clipToAncestors([...found.range.getClientRects()], node.parentElement),
   }
 }
 
@@ -162,7 +191,7 @@ function attributeHit(x: number, y: number): InspectHit | null {
           source: 'attribute',
           api: 'elementFromPoint',
           label: `@${attr} attribute`,
-          rects: [...el.getClientRects()],
+          rects: clipToAncestors([...el.getClientRects()], el.parentElement),
         }
       }
     }
