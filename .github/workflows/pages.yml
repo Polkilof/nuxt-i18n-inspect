@@ -34,6 +34,11 @@ jobs:
       - name: Install dependencies
         run: npx nypm@latest i
 
+      # Кореневий tsconfig розширює ./.nuxt/tsconfig.json, а на чистому раннері
+      # його ще немає - без цього кроку prepack падає на EXTENDS_RESOLVE
+      - name: Prepare
+        run: npm run dev:prepare
+
       # demo підключає модуль як file:.., тож dist має існувати до збірки
       - name: Build module
         run: npm run prepack
