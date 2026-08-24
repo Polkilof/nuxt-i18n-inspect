@@ -4,6 +4,8 @@ Alt-click any text in your running Nuxt app, edit it, and the change lands in yo
 
 ![Inspect mode on, Alt+click on a paragraph, the text edited in the panel — and the change landing in the locale JSON file](docs/demo.gif)
 
+[**Try it in the browser.**](https://stackblitz.com/github/Polkilof/nuxt-i18n-inspect?file=demo%2Fi18n%2Flocales%2Fen.json) StackBlitz boots a real dev server, so an edit really does rewrite `en.json` in the file tree next to you. The [overview page](https://polkilof.github.io/nuxt-i18n-inspect/) is a static build — it shows what the module looks like, but nothing on it can be edited.
+
 ```ts
 export default defineNuxtConfig({
   modules: ['@nuxtjs/i18n', 'nuxt-i18n-inspect'],
