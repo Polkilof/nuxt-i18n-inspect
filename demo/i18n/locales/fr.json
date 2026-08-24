@@ -1,0 +1,130 @@
+{
+  "brand": {
+    "name": "nuxt-i18n-inspect",
+    "tagline": "traduction en contexte"
+  },
+  "nav": {
+    "overview": "Presentation",
+    "app": "Application",
+    "github": "GitHub",
+    "docs": "Documentation"
+  },
+  "hero": {
+    "badge": "Module Nuxt, MIT",
+    "title": "Corrigez vos traductions la ou vous les lisez.",
+    "subtitle": "Alt-clic sur un texte de votre application, vous le reecrivez, et la modification arrive dans votre fichier JSON. Pas de serveur, pas de base, pas de service de synchronisation.",
+    "primary": "Essayer sur cette page",
+    "secondary": "Lire la documentation",
+    "hint": "Chaque ligne ci-dessous est une cle dans un fichier JSON.",
+    "github": "Voir sur GitHub",
+    "tryLine": "Activez le mode inspection avec Alt+Shift+I, puis Alt-cliquez sur cette phrase. Elle vit dans fr.json et change des que vous appuyez sur Ctrl+Entree.",
+    "sampleLine": "Cette phrase vit dans fr.json. Ouvrez la demo en direct pour la reecrire depuis la page.",
+    "live": "Ouvrir la demo en direct"
+  },
+  "value": {
+    "heading": "Pourquoi un de plus",
+    "git": {
+      "title": "Votre git reste la reference",
+      "body": "Les plateformes de traduction gardent vos textes sur leur serveur et vous les rendent a leurs conditions. Ce module ecrit directement dans les fichiers qui passent deja par votre revue."
+    },
+    "nothing": {
+      "title": "Rien a faire tourner",
+      "body": "Pas de compte, pas de service, pas de conteneur a maintenir. Le module vit dans votre serveur de developpement et ne laisse rien dans le build de production."
+    },
+    "writer": {
+      "title": "Pense pour celui qui redige",
+      "body": "Celui qui ecrit les textes — marketing, design, direction — ouvre l application, voit la vraie mise en page a la vraie largeur, corrige sa phrase et n attend plus un developpeur pour un seul mot."
+    }
+  },
+  "steps": {
+    "heading": "Trois etapes, aucune configuration",
+    "one": "Ajoutez le module dans nuxt.config et lancez votre serveur.",
+    "two": "Appuyez sur Alt+Shift+I. Survolez, la cle apparait au-dessus du texte.",
+    "three": "Alt-clic, corrigez, Ctrl+Entree. Le fichier change, la page suit."
+  },
+  "signup": {
+    "heading": "Une version Pro arrive",
+    "body": "Merge requests ouvertes pour vous, historique des modifications, roles et traduction automatique. Le meme outil local, avec plus dedans. Laissez votre adresse pour etre prevenu.",
+    "placeholder": "vous{'@'}entreprise.com",
+    "button": "Tenez-moi au courant",
+    "privacy": "Un seul message a la sortie. Rien d autre, jamais.",
+    "success": "Vous etes sur la liste. Merci.",
+    "label": "Adresse e-mail"
+  },
+  "errors": {
+    "empty": "Saisissez d abord votre adresse e-mail.",
+    "format": "Cela ne ressemble pas a une adresse e-mail."
+  },
+  "page": {
+    "title": "Demandes de conge",
+    "subtitle": "Tout ce que votre equipe a demande, au meme endroit."
+  },
+  "stats": {
+    "pending": "En attente de vous",
+    "approved": "Approuvees ce mois-ci",
+    "daysLeft": "Jours restants cette annee"
+  },
+  "tabs": {
+    "active": "En cours",
+    "archive": "Archives"
+  },
+  "table": {
+    "person": "Personne",
+    "type": "Type",
+    "dates": "Dates",
+    "status": "Statut"
+  },
+  "type": {
+    "vacation": "Conges",
+    "sick": "Arret maladie",
+    "parental": "Conge parental"
+  },
+  "status": {
+    "pending": "En attente",
+    "approved": "Approuvee",
+    "declined": "Refusee"
+  },
+  "action": {
+    "cancel": "Annuler"
+  },
+  "empty": {
+    "title": "Rien dans les archives",
+    "body": "Les demandes arrivent ici une fois cloturees. Rien ne l a ete cette annee."
+  },
+  "form": {
+    "title": "Demander des conges",
+    "type": "Type",
+    "from": "Premier jour",
+    "to": "Dernier jour",
+    "comment": "Motif",
+    "commentHint": "Votre responsable le verra.",
+    "submit": "Envoyer la demande",
+    "sent": "Envoye. Enfin, il le serait si cette demo avait un serveur.",
+    "errorDates": "Choisissez les deux jours, le premier et le dernier.",
+    "errorComment": "Donnez un peu plus de contexte, au moins une phrase."
+  },
+  "modal": {
+    "title": "Annuler cette demande ?",
+    "body": "Elle disparait de la liste de votre responsable. Vous pourrez toujours redemander.",
+    "confirm": "Oui, annuler",
+    "keep": "La garder"
+  },
+  "footer": {
+    "tagline": "Un module Nuxt de developpement pour corriger les traductions dans la page. Vos fichiers de langue restent la seule reference.",
+    "product": "Produit",
+    "resources": "Ressources",
+    "project": "Projet",
+    "overview": "Presentation",
+    "app": "Application",
+    "demo": "Demo en direct",
+    "pro": "Version Pro",
+    "docs": "Documentation",
+    "start": "Demarrage",
+    "limits": "Limites",
+    "github": "GitHub",
+    "issues": "Tickets",
+    "npm": "Paquet npm",
+    "rights": "Publie sous licence MIT.",
+    "note": "Chaque mot de cette page est une cle dans un fichier JSON. Corrigez-en un et regardez le fichier changer."
+  }
+}

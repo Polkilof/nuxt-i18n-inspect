@@ -51,7 +51,7 @@ The second one is noisy by nature: it finds headings, captions and anything nobo
 
 **Key list** answers "what is left in the whole project". It reads the locale files instead of walking the page, because walking the page can never be complete — a string has to render to be marked, and error states, empty states and modals will not render on their own.
 
-For every locale it shows coverage (`de 412/500`), groups the missing keys by namespace so you translate one context at a time, and puts the base-language text under each key so a copywriter has something to translate from.
+For every locale it shows coverage (`de 412/500`), groups the missing keys by namespace so you translate one context at a time, and puts the base-language text under each key so whoever is writing has something to work from.
 
 ![The key list: coverage per locale, keys grouped by namespace, the base text under each one and an empty field to translate into](docs/missing-keys.png)
 

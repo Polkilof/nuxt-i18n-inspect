@@ -1,0 +1,130 @@
+{
+  "brand": {
+    "name": "nuxt-i18n-inspect",
+    "tagline": "in-context translation editing"
+  },
+  "nav": {
+    "overview": "Overview",
+    "app": "Live app",
+    "github": "GitHub",
+    "docs": "Docs"
+  },
+  "hero": {
+    "badge": "Nuxt module, MIT",
+    "title": "Edit your translations where you read them.",
+    "subtitle": "Alt-click any text in your running app, fix the wording, and the change lands in your locale JSON file. No backend, no database, no sync service.",
+    "primary": "Try it on this page",
+    "secondary": "Read the docs",
+    "hint": "Every line you see below is a key in a JSON file.",
+    "github": "View on GitHub",
+    "tryLine": "Turn inspect mode on with Alt+Shift+I, then Alt-click this sentence. It lives in en.json and changes the moment you press Ctrl+Enter.",
+    "sampleLine": "This sentence lives in en.json. Open the live demo and rewrite it from the page itself.",
+    "live": "Open the live demo"
+  },
+  "value": {
+    "heading": "Why another one of these",
+    "git": {
+      "title": "Your git stays the truth",
+      "body": "Translation platforms keep your strings on their server and hand them back on their terms. This module writes straight into the files that already go through your review."
+    },
+    "nothing": {
+      "title": "Nothing to run",
+      "body": "No account, no service, no container to keep alive. The module lives inside your dev server and registers nothing at all in a production build."
+    },
+    "writer": {
+      "title": "Built for whoever writes",
+      "body": "Whoever owns the words — a marketer, a designer, the founder — opens the app, sees the real layout at the real width, fixes the sentence and never waits for a developer to land a one-word change."
+    }
+  },
+  "steps": {
+    "heading": "Three steps, no configuration",
+    "one": "Add the module to nuxt.config and start your dev server.",
+    "two": "Press Alt+Shift+I. Hover anything, the key shows up above it.",
+    "three": "Alt-click, edit, Ctrl+Enter. The file changes, the page updates."
+  },
+  "signup": {
+    "heading": "A Pro version is coming",
+    "body": "Merge requests opened for you, edit history, roles and machine translation. The same local tool, with more in it. Leave your address to hear about it first.",
+    "placeholder": "you{'@'}company.com",
+    "button": "Keep me posted",
+    "privacy": "One message when it ships. Nothing else, ever.",
+    "success": "You are on the list. Thank you.",
+    "label": "Email address"
+  },
+  "errors": {
+    "empty": "Type your email address first.",
+    "format": "That does not look like an email address."
+  },
+  "page": {
+    "title": "Leave requests",
+    "subtitle": "Everything your team has asked for, in one place."
+  },
+  "stats": {
+    "pending": "Waiting for you",
+    "approved": "Approved this month",
+    "daysLeft": "Days left this year"
+  },
+  "tabs": {
+    "active": "Active",
+    "archive": "Archive"
+  },
+  "table": {
+    "person": "Person",
+    "type": "Type",
+    "dates": "Dates",
+    "status": "Status"
+  },
+  "type": {
+    "vacation": "Vacation",
+    "sick": "Sick leave",
+    "parental": "Parental leave"
+  },
+  "status": {
+    "pending": "Pending",
+    "approved": "Approved",
+    "declined": "Declined"
+  },
+  "action": {
+    "cancel": "Cancel"
+  },
+  "empty": {
+    "title": "Nothing in the archive yet",
+    "body": "Requests move here once they are closed. Nothing has been closed this year."
+  },
+  "form": {
+    "title": "Ask for time off",
+    "type": "Type",
+    "from": "First day",
+    "to": "Last day",
+    "comment": "Why",
+    "commentHint": "Your manager sees this.",
+    "submit": "Send request",
+    "sent": "Sent. Well, it would be, if this demo had a backend.",
+    "errorDates": "Pick both days, the first one and the last one.",
+    "errorComment": "Tell your manager a little more, at least a sentence."
+  },
+  "modal": {
+    "title": "Cancel this request?",
+    "body": "It disappears from your manager list. You can always ask again.",
+    "confirm": "Yes, cancel it",
+    "keep": "Keep it"
+  },
+  "footer": {
+    "tagline": "A dev-only Nuxt module for editing translations in the running page. Your locale files stay the only source of truth.",
+    "product": "Product",
+    "resources": "Resources",
+    "project": "Project",
+    "overview": "Overview",
+    "app": "Live app",
+    "demo": "Live demo",
+    "pro": "Pro version",
+    "docs": "Documentation",
+    "start": "Getting started",
+    "limits": "Limitations",
+    "github": "GitHub",
+    "issues": "Issues",
+    "npm": "npm package",
+    "rights": "Released under the MIT license.",
+    "note": "Every word on this page is a key in a JSON file. Edit one and watch the file change."
+  }
+}

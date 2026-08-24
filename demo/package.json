@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "name": "nuxt-i18n-inspect-demo",
+  "type": "module",
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@internationalized/date": "^3.12.3",
+    "@nuxtjs/i18n": "^10.6.0",
+    "nuxt": "^4.5.2",
+    "nuxt-i18n-inspect": "file:..",
+    "reka-ui": "^2.10.3"
+  }
+}

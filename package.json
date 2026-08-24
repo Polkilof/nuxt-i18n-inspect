@@ -36,17 +36,19 @@
     "dist"
   ],
   "workspaces": [
-    "playground"
+    "playground",
+    "demo"
   ],
   "scripts": {
     "prepack": "nuxt-module-build build",
     "dev": "npm run dev:prepare && nuxt dev playground --host 0.0.0.0",
+    "demo": "npm run dev:prepare && nuxt dev demo --port 3001",
     "dev:build": "nuxt build playground",
-    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playground",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playground && nuxt prepare demo",
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest watch",
-    "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
+    "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit && cd ../demo && vue-tsc --noEmit"
   },
   "dependencies": {
     "@nuxt/kit": "^4.5.2"

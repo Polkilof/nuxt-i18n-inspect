@@ -12,9 +12,14 @@ export default createConfigForNuxt({
   dirs: {
     src: [
       './playground',
+      './demo',
     ],
   },
 })
   .append(
-    // your custom flat config here...
+    {
+      // сторінки Nuxt іменуються за маршрутом, однослівні імена тут норма
+      files: ['**/pages/**/*.vue'],
+      rules: { 'vue/multi-word-component-names': 'off' },
+    },
   )

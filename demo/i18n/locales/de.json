@@ -1,0 +1,32 @@
+{
+  "nav": {
+    "overview": "Uberblick",
+    "app": "Anwendung",
+    "github": "GitHub",
+    "docs": "Dokumentation"
+  },
+  "hero": {
+    "badge": "Nuxt-Modul, MIT",
+    "title": "Ubersetzungen dort andern, wo man sie liest."
+  },
+  "steps": {
+    "heading": "Drei Schritte, keine Konfiguration"
+  },
+  "page": {
+    "title": "Urlaubsantrage"
+  },
+  "tabs": {
+    "active": "Aktiv",
+    "archive": "Archiv"
+  },
+  "status": {
+    "pending": "Offen",
+    "approved": "Genehmigt",
+    "declined": "Abgelehnt"
+  },
+  "footer": {
+    "product": "Produkt",
+    "resources": "Ressourcen",
+    "project": "Projekt"
+  }
+}
