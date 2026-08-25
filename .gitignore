@@ -57,3 +57,6 @@ Temporary Items
 
 # Internal notes - not published
 documents
+
+# Editor and tooling backups
+*.bak
