@@ -1,4 +1,4 @@
 {
   "installDependencies": true,
-  "startCommand": "npm run demo"
+  "startCommand": "NODE_NO_WARNINGS=1 npm run demo"
 }
