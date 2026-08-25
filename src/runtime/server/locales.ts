@@ -20,6 +20,35 @@ export interface WriteEntry {
   value: string
 }
 
+/** Куди що лягло. Віддається клієнтові й доступне слухачам хука. */
+export interface WriteResult {
+  files: string[]
+  placement: { key: string, file: string, created: boolean }[]
+}
+
+/**
+ * Контекст хука `i18nInspect:write` — єдиний шов у записі.
+ *
+ * Дає стороннім модулям перехопити збереження, не чіпаючи ні роут, ні панель:
+ * адреса й формат відповіді лишаються ті самі, змінюється тільки те, куди йде
+ * правка. Слухач, який не заповнив `result`, працює як спостерігач — ядро
+ * запише файл саме, а слухач лише дізнається про зміну.
+ */
+export interface WriteContext {
+  locale: string
+  entries: WriteEntry[]
+  /** Файли цієї локалі за конфігом @nuxtjs/i18n. */
+  files: string[]
+  /** Заповнений слухачем результат. Не порожній — ядро у файл не пише. */
+  result: WriteResult | null
+}
+
+declare module 'nitropack/types' {
+  interface NitroRuntimeHooks {
+    'i18nInspect:write': (context: WriteContext) => void | Promise<void>
+  }
+}
+
 /** Абсолютні шляхи до файлів кожної локалі — їх кладе модуль на етапі setup. */
 export function localeFilesOf(event: H3Event): Record<string, string[]> {
   return (useRuntimeConfig(event).i18nInspect?.localeFiles as Record<string, string[]>) ?? {}
@@ -59,7 +88,7 @@ export async function loadLocale(files: string[]): Promise<Map<string, string>> 
  * Кожен файл пишеться через тимчасовий із заміною: обрив на півдорозі не має
  * лишати порізану локаль. Крапка на початку імені — щоб не смикати вотчер.
  */
-export async function writeEntries(files: string[], entries: WriteEntry[]) {
+export async function writeEntries(files: string[], entries: WriteEntry[]): Promise<WriteResult> {
   const sources = new Map<string, { text: string, json: Record<string, unknown> }>()
 
   for (const file of files) {

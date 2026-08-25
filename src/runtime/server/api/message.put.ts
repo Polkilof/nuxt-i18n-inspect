@@ -1,5 +1,9 @@
 import { createError, defineEventHandler, readBody } from 'h3'
+// саме з nitropack/runtime, а не з '#imports': кореневий vue-tsc перевіряє
+// цей файл у застосунковому контексті, де серверних автоімпортів немає
+import { useNitroApp } from 'nitropack/runtime'
 import { localeFilesOf, writeEntries } from '../locales'
+import type { WriteContext } from '../locales'
 
 /**
  * Запис одного ключа у файл локалі. Джерело істини — файл у репозиторії,
@@ -24,6 +28,18 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 404, statusMessage: `No files found for locale “${locale}”` })
   }
 
-  const { placement } = await writeEntries(files, [{ key, value }])
-  return { file: placement[0]!.file, created: placement[0]!.created }
+  // Шов для сторонніх модулів: слухач або просто дізнається про правку,
+  // або бере запис на себе, заповнивши context.result.
+  const context: WriteContext = { locale, entries: [{ key, value }], files, result: null }
+  await useNitroApp().hooks.callHook('i18nInspect:write', context)
+
+  const { placement } = context.result ?? await writeEntries(files, context.entries)
+
+  // placement тепер може прийти ззовні, тож порожній масив — не «не буває»
+  const written = placement[0]
+  if (!written) {
+    throw createError({ statusCode: 500, statusMessage: 'The write handler reported no placement' })
+  }
+
+  return { file: written.file, created: written.created }
 })
