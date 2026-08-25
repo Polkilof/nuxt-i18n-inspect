@@ -82,6 +82,7 @@ function subscribe() {
           >
             <span class="prompt">npm i</span>
             <span>nuxt-i18n-inspect</span>
+            <span class="sr-only">{{ t('hero.copy') }}</span>
             <svg
               v-if="copied"
               class="ico done"
@@ -114,6 +115,15 @@ function subscribe() {
             ><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
           </a>
         </div>
+
+        <!-- галочка після копіювання має aria-hidden, тож для тих, хто слухає
+             сторінку, це єдине підтвердження, що клік узагалі щось зробив -->
+        <p
+          class="sr-only"
+          aria-live="polite"
+        >
+          {{ copied ? t('hero.copied') : '' }}
+        </p>
 
         <p class="hint">
           {{ t('hero.hint') }}

@@ -19,6 +19,8 @@
     "github": "View on GitHub",
     "tryLine": "Turn inspect mode on with Alt+Shift+I, then Alt-click this sentence. It lives in en.json and changes the moment you press Ctrl+Enter.",
     "sampleLine": "This sentence lives in en.json. Open the live demo and rewrite it from the page itself.",
+    "copy": "copy to clipboard",
+    "copied": "Install command copied.",
     "live": "Open the live demo"
   },
   "value": {

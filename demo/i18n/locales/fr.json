@@ -19,6 +19,8 @@
     "github": "Voir sur GitHub",
     "tryLine": "Activez le mode inspection avec Alt+Shift+I, puis Alt-cliquez sur cette phrase. Elle vit dans fr.json et change des que vous appuyez sur Ctrl+Entree.",
     "sampleLine": "Cette phrase vit dans fr.json. Ouvrez la demo en direct pour la reecrire depuis la page.",
+    "copy": "copier dans le presse-papiers",
+    "copied": "Commande d'installation copiee.",
     "live": "Ouvrir la demo en direct"
   },
   "value": {
