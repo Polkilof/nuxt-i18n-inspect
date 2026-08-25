@@ -9,3 +9,5 @@
 export const REPO = 'https://github.com/Polkilof/nuxt-i18n-inspect'
 
 export const STACKBLITZ = 'https://stackblitz.com/github/Polkilof/nuxt-i18n-inspect?file=demo%2Fi18n%2Flocales%2Fen.json'
+
+export const NPM = 'https://www.npmjs.com/package/nuxt-i18n-inspect'

@@ -126,7 +126,7 @@ const languages = computed(() => locales.value.map(item => ({
           <h4>{{ t('footer.project') }}</h4>
           <a :href="REPO">{{ t('footer.github') }}</a>
           <a :href="REPO + '/issues'">{{ t('footer.issues') }}</a>
-          <a href="https://www.npmjs.com/package/nuxt-i18n-inspect">{{ t('footer.npm') }}</a>
+          <a :href="NPM">{{ t('footer.npm') }}</a>
         </div>
       </div>
 
