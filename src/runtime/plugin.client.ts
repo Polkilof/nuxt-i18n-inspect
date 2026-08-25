@@ -7,6 +7,13 @@ import { createOverlay } from './overlay'
 import { probe, setTranslationResolver } from './probe'
 import { hasUnsaved, state } from './state'
 import type { InspectHit } from './probe'
+import type { PanelAction } from './state'
+
+declare module '#app' {
+  interface RuntimeNuxtHooks {
+    'i18nInspect:actions': (actions: PanelAction[]) => void | Promise<void>
+  }
+}
 
 /**
  * Dev-only режим інспектування:
@@ -80,6 +87,12 @@ export default defineNuxtPlugin({
         // інша мова — інша множина відсутніх ключів
         scheduleRescan()
       })
+
+      // Шов для сторонніх модулів: слухач дописує свої кнопки в масив.
+      // Слухача треба реєструвати в setup() свого плагіна — усі setup()
+      // виконуються до app:mounted, тож він гарантовано встигне. Без await:
+      // масив реактивний, тож асинхронний слухач допише кнопки й пізніше.
+      void nuxtApp.callHook('i18nInspect:actions', state.actions)
 
       const host = document.createElement('div')
       host.setAttribute('data-i18n-inspect', 'panel')

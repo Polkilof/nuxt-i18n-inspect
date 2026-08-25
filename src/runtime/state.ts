@@ -27,6 +27,32 @@ export interface Selection {
   loading: boolean
 }
 
+/**
+ * Кнопка в панелі від стороннього модуля.
+ *
+ * Другий шов поруч із `i18nInspect:write`: там надбудова змінює, що робить
+ * збереження, тут — додає власну дію, не форкаючи панель на вісімсот рядків.
+ * Дія працює з вибіркою цілком, а не з окремою локаллю: «створити merge
+ * request» стосується ключа, а не рядка.
+ */
+export interface PanelAction {
+  /** Стабільний ідентифікатор — за ним дію можна замінити повторною реєстрацією. */
+  id: string
+  /** Підпис кнопки. Англійською: це публічний UI. */
+  label: string
+  /** Чи показувати для цієї вибірки. Без функції — показуємо завжди. */
+  visible?: (selection: Selection) => boolean
+  /** Чи заблокувати кнопку. Без функції — активна. */
+  disabled?: (selection: Selection) => boolean
+  run: (selection: Selection) => void | Promise<void>
+}
+
+/** Які дії показати для поточної вибірки. Винесено з панелі, щоб було що тестувати. */
+export function visibleActions(actions: PanelAction[], selection: Selection | null): PanelAction[] {
+  if (!selection) return []
+  return actions.filter(action => action.visible?.(selection) ?? true)
+}
+
 export interface AuditState {
   /** Маркер є, але ключа немає в поточній локалі — на екрані фолбек. */
   untranslated: boolean
@@ -104,6 +130,11 @@ export interface InspectState {
   refreshAudit: (() => void) | null
   /** Перечитати звіт із файлів. Реєструє плагін. */
   loadReport: (() => void) | null
+  /**
+   * Дії від сторонніх модулів. Наповнює плагін через хук `i18nInspect:actions`
+   * перед монтуванням панелі; масив реактивний, тож пізні додавання теж видно.
+   */
+  actions: PanelAction[]
 }
 
 /**
@@ -135,6 +166,7 @@ export const state = reactive<InspectState>({
   setLocale: null,
   refreshAudit: null,
   loadReport: null,
+  actions: [],
 })
 
 /** Чи є незбережені правки — питає і панель, і плагін перед перемиканням. */

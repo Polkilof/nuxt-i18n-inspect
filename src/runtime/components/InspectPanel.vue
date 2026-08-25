@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { state } from '../state'
-import type { LocaleEntry, ReportItem } from '../state'
+import { state, visibleActions } from '../state'
+import type { LocaleEntry, PanelAction, ReportItem } from '../state'
 
 const props = defineProps<{ hotkey: string }>()
 
@@ -13,6 +13,13 @@ const report = computed(() => state.report)
 const donor = computed(() => selection.value?.entries.find(entry => entry.value.trim()) ?? null)
 
 const dirty = (entry: LocaleEntry) => entry.draft !== entry.value
+
+/** Кнопки від сторонніх модулів: дописані через хук `i18nInspect:actions`. */
+const actions = computed(() => visibleActions(state.actions, state.selection))
+
+function runAction(action: PanelAction) {
+  if (state.selection) void action.run(state.selection)
+}
 
 function shortFile(entry: LocaleEntry) {
   return entry.file?.split(/[/\\]/).slice(-2).join('/') ?? ''
@@ -517,6 +524,22 @@ async function saveItem(item: ReportItem) {
             </span>
           </div>
         </div>
+      </div>
+
+      <!-- Дії надбудов. Нижче полів, бо стосуються ключа цілком, а не рядка. -->
+      <div
+        v-if="actions.length"
+        class="line"
+      >
+        <button
+          v-for="action in actions"
+          :key="action.id"
+          class="btn"
+          :disabled="action.disabled?.(selection) ?? false"
+          @click="runAction(action)"
+        >
+          {{ action.label }}
+        </button>
       </div>
 
       <p
