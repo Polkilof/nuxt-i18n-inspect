@@ -10,11 +10,14 @@
   "keywords": [
     "nuxt",
     "nuxt-module",
+    "nuxt-i18n",
     "i18n",
     "vue-i18n",
     "translations",
     "localization",
-    "in-context-editing"
+    "in-context-editing",
+    "i18n-inspector",
+    "devtools"
   ],
   "type": "module",
   "exports": {
