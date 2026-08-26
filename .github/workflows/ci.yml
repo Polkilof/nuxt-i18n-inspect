@@ -66,6 +66,10 @@ jobs:
       - name: Install dependencies
         run: npx nypm@latest i
 
+      # tsconfig.json extends .nuxt/tsconfig.json, which only exists after this
+      - name: Prepare
+        run: npm run dev:prepare
+
       - name: Pack the module
         run: npm pack --pack-destination test/nuxt3
 
