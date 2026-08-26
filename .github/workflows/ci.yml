@@ -47,3 +47,34 @@ jobs:
 
       - name: Test
         run: npm run test
+
+  # Модуль заявляє nuxt: '>=3.0.0'. Кореневі тести йдуть на Nuxt 4 з i18n v10,
+  # тож нижню межу перевіряємо окремо — на справжньому Nuxt 3 і i18n v9,
+  # причому не з сирців, а з тарбола: рівно те, що отримає користувач із npm.
+  nuxt3:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24.19.0
+
+      - run: npm i -g --force corepack@latest && corepack enable
+
+      - name: Install dependencies
+        run: npx nypm@latest i
+
+      - name: Pack the module
+        run: npm pack --pack-destination test/nuxt3
+
+      - name: Install fixture
+        working-directory: test/nuxt3
+        run: |
+          npm install --no-audit --no-fund
+          npm install --no-audit --no-fund --no-save ./nuxt-i18n-inspect-*.tgz
+
+      - name: Test
+        working-directory: test/nuxt3
+        run: npm test

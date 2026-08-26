@@ -60,3 +60,7 @@ documents
 
 # Editor and tooling backups
 *.bak
+
+# npm pack output: фікстура test/nuxt3 ставить модуль із тарбола
+*.tgz
+test/nuxt3/package-lock.json

@@ -1,0 +1,16 @@
+{
+  "name": "nuxt-i18n-inspect-nuxt3-fixture",
+  "private": true,
+  "type": "module",
+  "description": "Окремий проєкт: перевіряє модуль на Nuxt 3 і @nuxtjs/i18n v9. Кореневі залежності тримають Nuxt 4 та i18n v10, тож інакше цю пару не поставити.",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@nuxt/test-utils": "^3.23.0",
+    "@nuxtjs/i18n": "^9.5.6",
+    "nuxt": "^3.21.11",
+    "vitest": "^3.2.0",
+    "vue": "^3.5.0"
+  }
+}

@@ -11,4 +11,9 @@ import { defineConfig } from 'vitest/config'
  */
 export default defineConfig({
   plugins: [vue()],
+  test: {
+    // test/nuxt3 — окремий проєкт зі своїми залежностями (Nuxt 3 + i18n v9).
+    // Кореневим запуском його не підняти: тут стоять Nuxt 4 та i18n v10.
+    exclude: ['**/node_modules/**', '**/dist/**', 'test/nuxt3/**'],
+  },
 })

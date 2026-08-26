@@ -6,5 +6,6 @@
     "playground",
     "demo",
     "test/fixtures",
+    "test/nuxt3",
   ]
 }

@@ -1,6 +1,7 @@
-import { resolve } from 'node:path'
-import { addPlugin, addServerHandler, createResolver, defineNuxtModule } from '@nuxt/kit'
+import { addPlugin, addServerHandler, createResolver, defineNuxtModule, useLogger } from '@nuxt/kit'
 import type { Nuxt } from '@nuxt/schema'
+import type { I18nOptions } from './locale-paths'
+import { localeFiles } from './locale-paths'
 
 export interface ModuleOptions {
   /**
@@ -17,43 +18,8 @@ export interface ModuleOptions {
   hotkey?: string
 }
 
-/**
- * Та частина конфігу @nuxtjs/i18n, яка нас цікавить. Описано тут, а не взято
- * з типів модуля, щоб не тягнути @nuxtjs/i18n у залежності: він у користувача
- * уже є, а нам від нього треба чотири поля.
- */
-type DeclaredFile = string | { path?: string }
-interface I18nOptions {
-  restructureDir?: string
-  langDir?: string
-  defaultLocale?: string
-  locales?: (string | { code?: string, file?: DeclaredFile, files?: DeclaredFile[] })[]
-}
-
 function i18nOptions(nuxt: Nuxt): I18nOptions {
   return (nuxt.options as unknown as { i18n?: I18nOptions }).i18n ?? {}
-}
-
-/**
- * Абсолютні шляхи до JSON-локалей із конфігу @nuxtjs/i18n.
- * Панель читає значення з файлу, бо в рантаймі повідомлення вже скомпільовані.
- */
-function localeFiles(nuxt: Nuxt): Record<string, string[]> {
-  const i18n = i18nOptions(nuxt)
-  const dir = resolve(nuxt.options.rootDir, i18n.restructureDir ?? 'i18n', i18n.langDir ?? 'locales')
-  const files: Record<string, string[]> = {}
-
-  for (const locale of i18n.locales ?? []) {
-    if (typeof locale === 'string' || !locale?.code) continue
-    const declared = locale.files ?? (locale.file ? [locale.file] : [])
-    const paths = declared
-      .map(file => (typeof file === 'string' ? file : file?.path))
-      .filter((path): path is string => !!path)
-      .map(path => resolve(dir, path))
-    if (paths.length) files[locale.code] = paths
-  }
-
-  return files
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -72,9 +38,24 @@ export default defineNuxtModule<ModuleOptions>({
     const resolver = createResolver(import.meta.url)
 
     nuxt.options.runtimeConfig.public.i18nInspect = { hotkey: options.hotkey! }
+
+    const { rootDir, srcDir } = nuxt.options
+    const i18n = i18nOptions(nuxt)
+    const files = localeFiles({ rootDir, srcDir }, i18n)
+
+    // Локалі оголошені, а файлів не видно — так поводиться @nuxtjs/i18n v8:
+    // він прибирає `file` з конфігу ще до того, як нас запустять, тож імен
+    // файлів нам просто нема звідки взяти. Мовчати про це — гірший варіант:
+    // панель відкриється й нічого не знайде.
+    if (i18n.locales?.length && !Object.keys(files).length) {
+      useLogger('nuxt-i18n-inspect').warn(
+        'No JSON locale files found in the @nuxtjs/i18n config. Editing will be unavailable; @nuxtjs/i18n v9 or newer is required.',
+      )
+    }
+
     // приватна частина: шляхи до файлів на клієнт не потрапляють
     nuxt.options.runtimeConfig.i18nInspect = {
-      localeFiles: localeFiles(nuxt),
+      localeFiles: files,
       // локаль, з якою звіт порівнює решту: множина ключів береться з неї
       defaultLocale: i18nOptions(nuxt).defaultLocale ?? '',
     }

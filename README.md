@@ -20,6 +20,14 @@ export default defineNuxtConfig({
 
 That is the whole setup. No `i18n.config.ts` changes — the module installs its hook at runtime.
 
+### Requirements
+
+| | |
+|---|---|
+| Nuxt | 3 or 4 — both are covered by CI |
+| `@nuxtjs/i18n` | v9 or newer. v8 strips the locale file names from the config before this module can read them, so editing cannot work there |
+| locale files | JSON — see [Limitations](#limitations) |
+
 ## Why
 
 Translation platforms want to own your strings. You push keys to their server, translators work there, you pull the result back, and now two systems disagree about what the truth is.
